@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
@@ -27,11 +25,9 @@ namespace ToolLauncher
             public string serializedMethodInfoStr;
         }
 
-        [SerializeField]
-        private string _settingName;
+        [SerializeField] private string _settingName;
 
-        [SerializeField]
-        protected List<ToolLauncherMenu> MenuList = new List<ToolLauncherMenu>();
+        [SerializeField] protected List<ToolLauncherMenu> MenuList = new List<ToolLauncherMenu>();
 
         public string DisplayName => !string.IsNullOrEmpty(_settingName) ? _settingName : name;
 
@@ -43,7 +39,6 @@ namespace ToolLauncher
 
     #region CustomEditor
 
-    // 日本語表示するためのEditor拡張
     [CustomEditor(typeof(ToolLauncherSetting))]
     class ToolLauncherSettingDrawer : Editor
     {
@@ -83,17 +78,25 @@ namespace ToolLauncher
         {
             var rect = position;
             rect.height = EditorGUIUtility.singleLineHeight;
-            EditorGUI.PropertyField(rect, property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.iconText)), new GUIContent("略称"));
+            EditorGUI.PropertyField(rect,
+                property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.iconText)),
+                new GUIContent("略称"));
             rect.y += rect.height + 2f;
-            EditorGUI.PropertyField(rect, property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.name)), new GUIContent("名前"));
+            EditorGUI.PropertyField(rect,
+                property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.name)), new GUIContent("名前"));
             rect.y += rect.height + 2f;
-            EditorGUI.PropertyField(rect, property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.tooltip)), new GUIContent("説明"));
+            EditorGUI.PropertyField(rect,
+                property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.tooltip)),
+                new GUIContent("説明"));
             rect.y += rect.height + 2f;
-            EditorGUI.PropertyField(rect, property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.documentURL)), new GUIContent("説明URL(省略化)"));
+            EditorGUI.PropertyField(rect,
+                property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.documentURL)),
+                new GUIContent("説明URL(省略化)"));
             rect.y += rect.height + 2f;
 
-            // AssemblyQualifiedNameを探すボタンを描画する
-            var propMethodInfoStr = property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.serializedMethodInfoStr));
+            // AssemblyQualifiedNameを探すボタン
+            var propMethodInfoStr =
+                property.FindPropertyRelative(nameof(ToolLauncherSetting.ToolLauncherMenu.serializedMethodInfoStr));
             const float buttonWidth = 80f;
             var horizontalRect1 = new Rect(rect) { width = rect.width - buttonWidth };
             var horizontalRect2 = new Rect(rect) { x = rect.x + horizontalRect1.width, width = buttonWidth };
@@ -104,41 +107,26 @@ namespace ToolLauncher
                 EditorGUI.PropertyField(horizontalRect1, propMethodInfoStr, new GUIContent("起動ツール"));
             }
 
-            var controlID = GUIUtility.GetControlID(FocusType.Keyboard, rect);
             if (GUI.Button(horizontalRect2, "ツール検索"))
             {
                 var dropdown = new ToolSelectDropdown(new AdvancedDropdownState(), methodInfo =>
                 {
                     if (methodInfo.ReflectedType != null)
                     {
-                        propMethodInfoStr.stringValue = methodInfo.ReflectedType.AssemblyQualifiedName;
-                        var serializedMethodInfo = new SerializedMethodInfo(methodInfo);
-                        var json = EditorJsonUtility.ToJson(serializedMethodInfo);
-                        propMethodInfoStr.stringValue = json;
+                        propMethodInfoStr.stringValue = SerializedMethodInfo.SerializeToJson(methodInfo);
                         property.serializedObject.ApplyModifiedProperties();
                     }
                 });
                 dropdown.Show(horizontalRect1);
             }
 
-            // DropDownMenuで選択されたTypeを取得する
-            // var current = Event.current;
-            // if (current.GetTypeForControl(controlID) == EventType.ExecuteCommand && current.commandName == "DropDownSelect")
-            // {
-            //     var selectedItem = DropDownMenu.GetSelectedItem(controlID);
-            //     if (!selectedItem.IsNullOrEmpty())
-            //     {
-            //         propAssemblyQualifiedName.stringValue = selectedItem;
-            //     }
-            // }
-
-            // 取得したTypeからWindowを開くボタン
+            // テスト実行ボタン
             rect.y += rect.height + 2f;
             if (GUI.Button(new Rect(rect) { x = horizontalRect2.x, width = horizontalRect2.width }, "テスト実行"))
             {
                 if (!string.IsNullOrEmpty(propMethodInfoStr.stringValue))
                 {
-                    var serializedMethodInfo = SerializedMethodInfo.CreateFromJsonString(propMethodInfoStr.stringValue);
+                    var serializedMethodInfo = SerializedMethodInfo.DeserializeFromJson(propMethodInfoStr.stringValue);
                     serializedMethodInfo?.Method?.Invoke(null, null);
                 }
             }
@@ -147,25 +135,6 @@ namespace ToolLauncher
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return (EditorGUIUtility.singleLineHeight + 2f) * 6f;
-        }
-
-        private List<(string, MethodInfo)> GetMenuItemMethods()
-        {
-            // MenuItemのAttributeがついたメソッドを探して呼ぶ
-            var result = new List<(string, MethodInfo)>();
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (var methodInfo in assemblies
-                         .SelectMany(x => x.GetTypes())
-                         .SelectMany(x =>
-                             x.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)))
-            {
-                var menuItem = methodInfo.GetCustomAttribute<MenuItem>();
-                if (menuItem == null) continue;
-                
-                result.Add((menuItem.menuItem, methodInfo));
-            }
-
-            return result;
         }
     }
 

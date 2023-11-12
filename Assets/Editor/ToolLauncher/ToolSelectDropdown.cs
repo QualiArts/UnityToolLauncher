@@ -12,14 +12,16 @@ namespace ToolLauncher
         private class DropDownItem : AdvancedDropdownItem
         {
             public readonly MethodInfo methodInfo;
+
             public DropDownItem(string name, MethodInfo methodInfo) : base(name)
             {
                 this.methodInfo = methodInfo;
             }
         }
-        
+
         private static List<(string, MethodInfo)> _menuItemMethodsCache;
         private Action<MethodInfo> _onSelected;
+
         public ToolSelectDropdown(AdvancedDropdownState state, Action<MethodInfo> onSelected) : base(state)
         {
             _onSelected = onSelected;
@@ -38,13 +40,13 @@ namespace ToolLauncher
 
             return root;
         }
-        
-        
+
+
         private List<(string, MethodInfo)> GetMenuItemMethods()
         {
             if (_menuItemMethodsCache != null) return _menuItemMethodsCache;
-            
-            // MenuItemのAttributeがついたメソッドを探して呼ぶ
+
+            // MenuItemのAttributeがついたメソッドを全て探す
             var result = new List<(string, MethodInfo)>();
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
             foreach (var methodInfo in assemblies
@@ -54,16 +56,15 @@ namespace ToolLauncher
             {
                 var menuItem = methodInfo.GetCustomAttribute<MenuItem>();
                 if (menuItem == null) continue;
-                if(menuItem.menuItem.StartsWith("CONTEXT")) continue;
-                
+                if (menuItem.menuItem.StartsWith("CONTEXT")) continue;
+
                 result.Add((menuItem.menuItem, methodInfo));
             }
 
             _menuItemMethodsCache = result;
-
             return result;
         }
-        
+
         protected override void ItemSelected(AdvancedDropdownItem item)
         {
             if (item is DropDownItem dropdown)
@@ -88,7 +89,7 @@ namespace ToolLauncher
                 var newChild = isLast
                     ? new DropDownItem(newChildName, methodInfo)
                     : new AdvancedDropdownItem(newChildName);
-                
+
                 parent.AddChild(newChild);
                 AddItem(newChild, methodInfo, pathParts, index + 1);
             }
@@ -97,7 +98,5 @@ namespace ToolLauncher
                 AddItem(existingChild, methodInfo, pathParts, index + 1);
             }
         }
-
     }
-    
 }

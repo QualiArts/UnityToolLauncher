@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
 
 namespace ToolLauncher
@@ -23,13 +24,20 @@ namespace ToolLauncher
         }
 
         [CanBeNull]
-        public static SerializedMethodInfo CreateFromJsonString(string json)
+        public static SerializedMethodInfo DeserializeFromJson(string json)
         {
             if (json == null) return null;
             return JsonUtility.FromJson<SerializedMethodInfo>(json);
         }
 
-        public SerializedMethodInfo(MethodInfo methodInfo)
+        public static string SerializeToJson(MethodInfo methodInfo)
+        {
+            var serializedMethodInfo = new SerializedMethodInfo(methodInfo);
+            var json = EditorJsonUtility.ToJson(serializedMethodInfo);
+            return json;
+        }
+
+        private SerializedMethodInfo(MethodInfo methodInfo)
         {
             _assemblyQualifiedName = methodInfo.ReflectedType?.AssemblyQualifiedName;
             _methodName = methodInfo.Name;
