@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a468957ea867414da7a221d9257a94b3, type: 3}
+  m_Name: ToolLauncherSetting-UnityDefault
+  m_EditorClassIdentifier:
+  _settingName: "Unity\u6A19\u6E96\u6A5F\u80FD"
+  MenuList:
+  - name: Scene
+    tooltip: "\u30B7\u30FC\u30F3\u30D3\u30E5\u30FC\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/UsingTheSceneView.html
+    iconText: Sc
+    assemblyQualifiedName: UnityEditor.SceneView, UnityEditor.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - name: Game
+    tooltip: "\u30B2\u30FC\u30E0\u30D3\u30E5\u30FC\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/GameView.html
+    iconText: Ga
+    assemblyQualifiedName: UnityEditor.GameView, UnityEditor.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - name: Inspector
+    tooltip: "\u30A4\u30F3\u30B9\u30DA\u30AF\u30BF\u30FC\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/UsingTheInspector.html
+    iconText: In
+    assemblyQualifiedName: UnityEditor.InspectorWindow, UnityEditor.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - name: "\u30D2\u30A8\u30E9\u30EB\u30AD\u30FC"
+    tooltip: "\u30D2\u30A8\u30E9\u30EB\u30AD\u30FC\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/Hierarchy.html
+    iconText: Hi
+    assemblyQualifiedName: UnityEditor.SceneHierarchyWindow, UnityEditor.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - name: Project
+    tooltip: "\u30D7\u30ED\u30B8\u30A7\u30AF\u30C8\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/ProjectView.html
+    iconText: Pr
+    assemblyQualifiedName: UnityEditor.ProjectBrowser, UnityEditor.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - name: Console
+    tooltip: "\u30B3\u30F3\u30BD\u30FC\u30EB\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/Console.html
+    iconText: Co
+    assemblyQualifiedName: UnityEditor.ConsoleWindow, UnityEditor.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - name: FrameDebugger
+    tooltip: "\u30D5\u30EC\u30FC\u30E0\u30C7\u30D0\u30C3\u30AC\u30FC\u3092\u8868\u793A"
+    documentURL:
+    iconText: FD
+    assemblyQualifiedName: UnityEditor.FrameDebuggerWindow, UnityEditor.CoreModule,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
