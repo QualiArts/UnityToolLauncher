@@ -56,12 +56,6 @@ namespace ToolLauncher
             serializedObject.Update();
             EditorGUILayout.PropertyField(_propSettingName, new GUIContent("表示名"));
             EditorGUILayout.PropertyField(_propMenuList, new GUIContent("ツール一覧"));
-            if (GUILayout.Button("保存"))
-            {
-                EditorUtility.SetDirty(target);
-                AssetDatabase.SaveAssetIfDirty(target);
-            }
-
             serializedObject.ApplyModifiedProperties();
         }
     }
