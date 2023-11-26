@@ -14,7 +14,7 @@ namespace ToolLauncher
 
         private IListDrawer _listDrawer;
 
-        [MenuItem("Tools/ツールランチャー %t")]
+        [MenuItem("Window/ツールランチャー %t")]
         public static void Open()
         {
             GetWindow<ToolLauncherWindow>(false, "ツールランチャー");
