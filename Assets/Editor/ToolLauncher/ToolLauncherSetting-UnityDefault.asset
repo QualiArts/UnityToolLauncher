@@ -14,40 +14,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingName: "Unity\u6A19\u6E96\u6A5F\u80FD"
   MenuList:
-  - name: Scene
-    tooltip: "\u30B7\u30FC\u30F3\u30D3\u30E5\u30FC\u3092\u8868\u793A"
-    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/UsingTheSceneView.html
-    iconText: Sc
-    serializedMethodInfoStr: '{"_assemblyQualifiedName":"UnityEditor.CreateBuiltinWindows,
-      UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","_methodName":"ShowAudioMixer"}'
-  - name: Game
-    tooltip: "\u30B2\u30FC\u30E0\u30D3\u30E5\u30FC\u3092\u8868\u793A"
-    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/GameView.html
-    iconText: Ga
-    serializedMethodInfoStr: '{"_assemblyQualifiedName":"UnityEditor.CreateBuiltinWindows,
-      UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","_methodName":"ShowGameView"}'
-  - name: Inspector
-    tooltip: "\u30A4\u30F3\u30B9\u30DA\u30AF\u30BF\u30FC\u3092\u8868\u793A"
-    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/UsingTheInspector.html
-    iconText: In
-    serializedMethodInfoStr: 
-  - name: "\u30D2\u30A8\u30E9\u30EB\u30AD\u30FC"
-    tooltip: "\u30D2\u30A8\u30E9\u30EB\u30AD\u30FC\u3092\u8868\u793A"
-    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/Hierarchy.html
-    iconText: Hi
-    serializedMethodInfoStr: 
-  - name: Project
-    tooltip: "\u30D7\u30ED\u30B8\u30A7\u30AF\u30C8\u3092\u8868\u793A"
-    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/ProjectView.html
-    iconText: Pr
-    serializedMethodInfoStr: 
-  - name: Console
-    tooltip: "\u30B3\u30F3\u30BD\u30FC\u30EB\u3092\u8868\u793A"
-    documentURL: https://docs.unity3d.com/ja/2021.3/Manual/Console.html
-    iconText: Co
-    serializedMethodInfoStr: 
   - name: FrameDebugger
     tooltip: "\u30D5\u30EC\u30FC\u30E0\u30C7\u30D0\u30C3\u30AC\u30FC\u3092\u8868\u793A"
-    documentURL: 
+    documentURL: https://docs.unity3d.com/ja/2019.4/Manual/FrameDebugger.html
     iconText: FD
-    serializedMethodInfoStr: 
+    serializedMethodInfoStr: '{"_assemblyQualifiedName":"UnityEditor.FrameDebuggerWindow,
+      UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","_methodName":"OpenWindow"}'
+  - name: "\u30E9\u30A4\u30C6\u30A3\u30F3\u30B0"
+    tooltip: "\u30E9\u30A4\u30C6\u30A3\u30F3\u30B0\u30A6\u30A3\u30F3\u30C9\u30A6\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2019.3/Manual/GlobalIllumination.html
+    iconText: LT
+    serializedMethodInfoStr: '{"_assemblyQualifiedName":"UnityEditor.LightingWindow,
+      UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","_methodName":"CreateLightingWindow"}'
+  - name: Light Explorer
+    tooltip: "\u30E9\u30A4\u30C8\u30A8\u30AF\u30B9\u30D7\u30ED\u30FC\u30E9\u30FC\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2022.3/Manual/LightingExplorer.html
+    iconText: LE
+    serializedMethodInfoStr: '{"_assemblyQualifiedName":"UnityEditor.LightingExplorerWindow,
+      UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","_methodName":"CreateLightingExplorerWindow"}'
+  - name: Audio Mixer
+    tooltip: "\u30AA\u30FC\u30C7\u30A3\u30AA\u30DF\u30AD\u30B5\u30FC\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2019.4/Manual/AudioMixer.html
+    iconText: AE
+    serializedMethodInfoStr: '{"_assemblyQualifiedName":"UnityEditor.CreateBuiltinWindows,
+      UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","_methodName":"ShowAudioMixer"}'
+  - name: Animation Window
+    tooltip: "\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u30A6\u30A3\u30F3\u30C9\u30A6\u3092\u8868\u793A"
+    documentURL: https://docs.unity3d.com/ja/2019.4/Manual/animeditor-UsingAnimationEditor.html
+    iconText: AW
+    serializedMethodInfoStr: '{"_assemblyQualifiedName":"UnityEditor.CreateBuiltinWindows,
+      UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","_methodName":"ShowAnimationWindow"}'
