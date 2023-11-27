@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.rarudo.unity-tool-launcher": "file:../../../",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.textmeshpro": "3.0.6",
