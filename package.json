@@ -1,8 +1,8 @@
 {
-  "name": "com.rarudo.unity-tool-launcher",
+  "name": "jp.qualiarts.unity-tool-launcher",
   "version": "1.0.0",
   "displayName": "Unity Tool Launcher",
   "description": "Tool Launcher for Unity",
   "unity": "2020.3",
-  "repository": "https://github.com/rarudo/UnityToolLauncher"
+  "repository": "https://github.com/QualiArts/UnityToolLauncher.git"
 }
