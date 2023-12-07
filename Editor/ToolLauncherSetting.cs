@@ -121,7 +121,7 @@ namespace ToolLauncher
                 if (!string.IsNullOrEmpty(propMethodInfoStr.stringValue))
                 {
                     var serializedMethodInfo = SerializedMethodInfo.DeserializeFromJson(propMethodInfoStr.stringValue);
-                    serializedMethodInfo?.Method?.Invoke(null, null);
+                    serializedMethodInfo?.Invoke();
                 }
             }
         }

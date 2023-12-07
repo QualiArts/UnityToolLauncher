@@ -37,6 +37,17 @@ namespace ToolLauncher
             return json;
         }
 
+        public void Invoke()
+        {
+            var parameterInfos = Method?.GetParameters();
+            bool hasMenuCommandParam = parameterInfos?.Length == 1;
+            var parameters = hasMenuCommandParam
+                ? new object[] { new MenuCommand(default, default) }
+                : null;
+
+            Method?.Invoke(null, parameters);
+        }
+
         private SerializedMethodInfo(MethodInfo methodInfo)
         {
             _assemblyQualifiedName = methodInfo.ReflectedType?.AssemblyQualifiedName;
