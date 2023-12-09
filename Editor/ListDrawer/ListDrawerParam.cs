@@ -18,10 +18,16 @@ namespace ToolLauncher.ListDrawer
         /// </summary>
         public readonly int index;
 
-        public ListDrawerParam([NotNull] ToolLauncherSetting.ToolLauncherMenu menu, int index)
+        /// <summary>
+        /// タグ名
+        /// </summary>
+        public readonly TagData tagData;
+
+        public ListDrawerParam([NotNull] ToolLauncherSetting.ToolLauncherMenu menu, int index, TagData tagData = default)
         {
             this.menu = menu;
             this.index = index;
+            this.tagData = tagData;
         }
     }
 }

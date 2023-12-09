@@ -54,6 +54,13 @@ namespace ToolLauncher.ListDrawer
                 textColor = Color.white,
             },
         };
+
+        public static readonly GUIStyle Tag = new GUIStyle(GUI.skin.GetStyle("sv_label_0"))
+        {
+            fixedWidth = 64,
+            fixedHeight = 16,
+            padding = new RectOffset(0, 0, 0, 2),
+        };
     }
 
     #endregion
@@ -70,6 +77,8 @@ namespace ToolLauncher.ListDrawer
             var originalRect = EditorGUILayout.GetControlRect(false, (EditorGUIUtility.singleLineHeight + 2f) * 2f);
             var current = Event.current;
             var hovered = originalRect.Contains(current.mousePosition);
+            var tagName = param.tagData.tagName;
+            var tagColor = param.tagData.tagColor;
 
             if (Event.current.type == EventType.Repaint)
             {
@@ -77,7 +86,7 @@ namespace ToolLauncher.ListDrawer
                 var bgStyle = index % 2 == 0 ? Styles.ItemBackground1 : Styles.ItemBackground2;
                 bgStyle.Draw(originalRect, hovered, false, false, false);
             }
-
+            
             // 左側のアイコン
             var iconStyle = Styles.TextIcon;
             // 文字数によって
@@ -85,6 +94,16 @@ namespace ToolLauncher.ListDrawer
                 iconStyle.fontSize = Mathf.Min(20, 40 / menu.iconText.Length);
             var imageRect = new Rect(originalRect) { width = Styles.TextIcon.fixedWidth };
             GUI.Label(imageRect, menu.iconText, Styles.TextIcon);
+
+            // タグカラー表示
+            if (!string.IsNullOrEmpty(param.tagData.tagName))
+            {
+                var color = GUI.color;
+                GUI.color = tagColor;
+                var iconRect = new Rect(originalRect) { width = 1 };
+                GUI.DrawTexture(iconRect, Texture2D.whiteTexture);
+                GUI.color = color;
+            }
 
             // 名前
             var nameLabelRect = new Rect(originalRect);
