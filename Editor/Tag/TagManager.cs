@@ -7,15 +7,41 @@ using UnityEngine;
 namespace ToolLauncher.Tag
 {
     /// <summary>
-    /// タグ選択GUIの管理
+    /// タグの管理
     /// </summary>
     public class TagManager
     {
-        [NonSerialized] private Dictionary<string, bool> tagEnabled = new Dictionary<string, bool>();
+        /// <summary>
+        /// タグ有効状態
+        /// </summary>
+        private Dictionary<string, bool> tagEnabled = new Dictionary<string, bool>();
+        
+        /// <summary>
+        /// タグのテクスチャ
+        /// </summary>
         private Dictionary<string, Texture2D> tagTextures = new Dictionary<string, Texture2D>();
 
+        static class Options
+        {
+            /// <summary>
+            /// タグボタン先頭のラベル
+            /// </summary>
+            public static readonly GUILayoutOption[] TagHeaderLabel = new GUILayoutOption[]
+            {
+                GUILayout.Width(24),
+            };
+        }
+        
         static class Styles
         {
+            /// <summary>
+            /// タグボタン先頭のラベル
+            /// </summary>
+            public static readonly GUIStyle TagHeaderLabel = new GUIStyle(EditorStyles.label)
+            {
+                padding = new RectOffset(2, 0, 4, 0),
+            };
+            
             /// <summary>
             /// 有効なタグのボタン
             /// </summary>
@@ -114,12 +140,9 @@ namespace ToolLauncher.Tag
         
         public void OnGUI(ToolLauncherSetting[] settings)
         {
-            var box = new GUIStyle(GUI.skin.box);
-            box.wordWrap = true;
             using (new EditorGUILayout.HorizontalScope())
             {
-                GUILayout.Space(4);
-                EditorGUILayout.LabelField("タグ", GUILayout.Width(26));
+                EditorGUILayout.LabelField("タグ",　Styles.TagHeaderLabel, Options.TagHeaderLabel);
                 
                 foreach (var setting in settings)
                 {
@@ -171,11 +194,13 @@ namespace ToolLauncher.Tag
             
             // ボタンの中のアイコン
             var icon = GetIconTexture(setting.TagName, setting.TagColor);
-            var iconRect = new Rect(controlRect);
-            iconRect.x = controlRect.x + iconSize;
-            iconRect.y = controlRect.y + buttonStyle.fixedHeight / 2 - iconSize / 2;
-            iconRect.width = iconSize;
-            iconRect.height = iconSize;
+            var iconRect = new Rect(controlRect)
+            {
+                x = controlRect.x + iconSize,
+                y = controlRect.y + buttonStyle.fixedHeight / 2 - iconSize / 2,
+                width = iconSize,
+                height = iconSize
+            };
             GUI.DrawTexture(iconRect, icon);
 
             // 色を元に戻す
