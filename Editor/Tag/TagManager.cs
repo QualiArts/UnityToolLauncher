@@ -186,22 +186,22 @@ namespace ToolLauncher.Tag
 
             // ボタン
             var buttonStyle = isOn ? Styles.OnTagButton : Styles.OffTagButton;
-            GUIContent content = new GUIContent(tag);
-            Vector2 contentSize = buttonStyle.CalcSize(content);
-            contentSize.x += iconSpace; // アイコン用に幅を広げる
-            var controlRect = EditorGUILayout.GetControlRect(false, contentSize.y, buttonStyle, GUILayout.Width(contentSize.x)); 
-            bool isClick = GUI.Button(controlRect, content, buttonStyle);
+            GUIContent buttonContent = new GUIContent(tag);
+            Vector2 buttonContentSize = buttonStyle.CalcSize(buttonContent);
+            buttonContentSize.x += iconSpace; // アイコン用に幅を広げる
+            var buttonRect = EditorGUILayout.GetControlRect(false, buttonContentSize.y, buttonStyle, GUILayout.Width(buttonContentSize.x)); 
+            bool isClick = GUI.Button(buttonRect, buttonContent, buttonStyle);
             
             // ボタンの中のアイコン
-            var icon = GetIconTexture(setting.TagName, setting.TagColor);
-            var iconRect = new Rect(controlRect)
+            var iconTexture = GetIconTexture(setting.TagName, setting.TagColor);
+            var iconRect = new Rect(buttonRect)
             {
-                x = controlRect.x + iconSize,
-                y = controlRect.y + buttonStyle.fixedHeight / 2 - iconSize / 2,
+                x = buttonRect.x + iconSize,
+                y = buttonRect.y + buttonStyle.fixedHeight / 2 - iconSize / 2,
                 width = iconSize,
                 height = iconSize
             };
-            GUI.DrawTexture(iconRect, icon);
+            GUI.DrawTexture(iconRect, iconTexture);
 
             // 色を元に戻す
             GUI.color = defaultColor; 
