@@ -64,7 +64,7 @@ namespace ToolLauncher
             serializedObject.Update();
             EditorGUILayout.PropertyField(_propSettingName, new GUIContent("表示名"));
             EditorGUILayout.PropertyField(_propTagName, new GUIContent("タグ名"));
-            EditorGUILayout.PropertyField(_propTagColor, new GUIContent("タグカラー(省略可)"));
+            EditorGUILayout.PropertyField(_propTagColor, new GUIContent("タグカラー"));
             EditorGUILayout.PropertyField(_propMenuList, new GUIContent("ツール一覧"));
             serializedObject.ApplyModifiedProperties();
         }
