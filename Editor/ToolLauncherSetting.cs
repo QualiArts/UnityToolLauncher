@@ -26,14 +26,13 @@ namespace ToolLauncher
         }
 
         [SerializeField] private string _settingName;
-
         [SerializeField] private string _tagName;
         [SerializeField] private Color _tagColor = new Color(1, 1 ,1 ,1);
 
         [SerializeField] protected List<ToolLauncherMenu> MenuList = new List<ToolLauncherMenu>();
 
         public string DisplayName => !string.IsNullOrEmpty(_settingName) ? _settingName : name;
-        public string TagName => _tagName;
+        public string TagName => !string.IsNullOrEmpty(_tagName) ? _tagName : DisplayName;
         public Color TagColor => _tagColor;
 
         public IReadOnlyList<ToolLauncherMenu> GetMenuList()
@@ -64,7 +63,7 @@ namespace ToolLauncher
         {
             serializedObject.Update();
             EditorGUILayout.PropertyField(_propSettingName, new GUIContent("表示名"));
-            EditorGUILayout.PropertyField(_propTagName, new GUIContent("タグ名(省略可)"));
+            EditorGUILayout.PropertyField(_propTagName, new GUIContent("タグ名"));
             EditorGUILayout.PropertyField(_propTagColor, new GUIContent("タグカラー(省略可)"));
             EditorGUILayout.PropertyField(_propMenuList, new GUIContent("ツール一覧"));
             serializedObject.ApplyModifiedProperties();
