@@ -96,7 +96,7 @@ namespace ToolLauncher.ListDrawer
             GUI.Label(imageRect, menu.iconText, Styles.TextIcon);
 
             // タグカラー表示
-            if (!string.IsNullOrEmpty(param.tagData.tagName))
+            if (!string.IsNullOrEmpty(tagName))
             {
                 var color = GUI.color;
                 GUI.color = tagColor;
