@@ -2,14 +2,24 @@ using UnityEngine;
 
 namespace ToolLauncher.Tag
 {
+    /// <summary>
+    /// ランチャー設定に付与するタグ情報
+    /// </summary>
     public struct TagData
     {
+        /// <summary>
+        /// タグの名前
+        /// </summary>
         public string tagName;
+        
+        /// <summary>
+        /// タグの色
+        /// </summary>
         public Color tagColor;
 
-        public TagData(string s, Color color)
+        public TagData(string tagName, Color color)
         {
-            tagName = s;
+            this.tagName = tagName;
             tagColor = color;
         }
     }
