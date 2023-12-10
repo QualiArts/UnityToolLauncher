@@ -12,11 +12,13 @@ namespace ToolLauncher
     public class TagManager
     {
         [NonSerialized] private Dictionary<string, bool> tagEnabled = new Dictionary<string, bool>();
-
         private Dictionary<string, Texture2D> tagTextures = new Dictionary<string, Texture2D>();
 
         static class Styles
         {
+            /// <summary>
+            /// 有効なタグのボタン
+            /// </summary>
             public static readonly GUIStyle OnTagButton = new GUIStyle(GUI.skin.button)
             {
                 margin = new RectOffset(0, 0, 3,  0),
@@ -24,7 +26,10 @@ namespace ToolLauncher
                 fixedHeight = 20,
                 alignment = TextAnchor.MiddleRight,
             };
-        
+            
+            /// <summary>
+            /// 無効なタグのボタン
+            /// </summary>
             public static readonly GUIStyle OffTagButton = new GUIStyle(GUI.skin.button)
             {
                 margin = new RectOffset(0, 0, 3,  0),
@@ -34,6 +39,9 @@ namespace ToolLauncher
             };
         }
 
+        /// <summary>
+        /// 有効化されているタグの数
+        /// </summary>
         public int ActiveTagCount
         {
             get { return tagEnabled.Count(x => x.Value == true); }
@@ -113,8 +121,6 @@ namespace ToolLauncher
                 GUILayout.Space(4);
                 EditorGUILayout.LabelField("タグ", GUILayout.Width(26));
                 
-                var defaultColor = GUI.color;
-                var defaultBgColor = GUI.backgroundColor;
                 foreach (var setting in settings)
                 {
                     var tag = setting.TagName;
@@ -122,54 +128,62 @@ namespace ToolLauncher
                     {
                         continue;
                     }
-
                     if (!tagEnabled.ContainsKey(tag))
                     {
                         tagEnabled.Add(tag, false);
                     }
                     
-                    bool isOn = tagEnabled[tag];
-                    if (!isOn)
-                    {
-                        GUI.color = new Color(1, 1, 1, 0.5f);
-                    }
-                    else
-                    {
-                        GUI.color = defaultColor;
-                    }
-
-                    var style = isOn ? Styles.OnTagButton : Styles.OffTagButton;
-                    var icon = GetIconTexture(setting.TagName, setting.TagColor);
-                    GUIContent content = new GUIContent(tag);
-                    Vector2 contentSize = style.CalcSize(content);
-                    contentSize.x += 10;
-                    
-                    var controlRect = EditorGUILayout.GetControlRect(
-                        false, contentSize.y, style, 
-                        new GUILayoutOption[] { 
-                            GUILayout.Width(contentSize.x), 
-                            GUILayout.Height(contentSize.y)
-                        });
-                    
-                    bool isClick = GUI.Button(controlRect, content, style);
-                    var iconRect = new Rect(controlRect);
-                    const int iconSize = 6;
-                    iconRect.x = controlRect.x + iconSize;
-                    iconRect.y = controlRect.y + style.fixedHeight / 2 - iconSize / 2;
-                    iconRect.width = iconSize;
-                    iconRect.height = iconSize;
-                    GUI.DrawTexture(iconRect, icon);
+                    bool isClick = DrawTagButton(tag, setting);
                     if (isClick)
                     {
-                        tagEnabled[tag] = !isOn;
+                        tagEnabled[tag] = !tagEnabled[tag];
                     }
                 }
-
-                GUI.backgroundColor = defaultBgColor;
-                GUI.color = defaultColor;
                 GUILayout.FlexibleSpace();
             }
         }
+
+        /// <summary>
+        /// タグボタンの描画
+        /// </summary>
+        /// <param name="tag">タグ名</param>
+        /// <param name="setting">設定ファイル</param>
+        /// <returns>クリックされたらtrue</returns>
+        private bool DrawTagButton(string tag, ToolLauncherSetting setting)
+        {
+            const int iconSpace = 10;
+            const int iconSize = 6;
+
+            var defaultColor = GUI.color;
+            bool isOn = tagEnabled[tag];
+            if (!isOn)
+            {
+                GUI.color = new Color(1, 1, 1, 0.5f);
+            }
+
+            // ボタン
+            var buttonStyle = isOn ? Styles.OnTagButton : Styles.OffTagButton;
+            GUIContent content = new GUIContent(tag);
+            Vector2 contentSize = buttonStyle.CalcSize(content);
+            contentSize.x += iconSpace; // アイコン用に幅を広げる
+            var controlRect = EditorGUILayout.GetControlRect(false, contentSize.y, buttonStyle, GUILayout.Width(contentSize.x)); 
+            bool isClick = GUI.Button(controlRect, content, buttonStyle);
+            
+            // ボタンの中のアイコン
+            var icon = GetIconTexture(setting.TagName, setting.TagColor);
+            var iconRect = new Rect(controlRect);
+            iconRect.x = controlRect.x + iconSize;
+            iconRect.y = controlRect.y + buttonStyle.fixedHeight / 2 - iconSize / 2;
+            iconRect.width = iconSize;
+            iconRect.height = iconSize;
+            GUI.DrawTexture(iconRect, icon);
+
+            // 色を元に戻す
+            GUI.color = defaultColor; 
+
+            return isClick;
+        }
+
 
         Texture2D GetIconTexture(string tag, Color c)
         {
