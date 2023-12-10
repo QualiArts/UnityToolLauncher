@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ToolLauncher
+namespace ToolLauncher.Tag
 {
     public struct TagData
     {

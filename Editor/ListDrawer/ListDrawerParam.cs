@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using ToolLauncher.Tag;
 
 namespace ToolLauncher.ListDrawer
 {
@@ -19,7 +20,7 @@ namespace ToolLauncher.ListDrawer
         public readonly int index;
 
         /// <summary>
-        /// タグ名
+        /// タグ情報
         /// </summary>
         public readonly TagData tagData;
 

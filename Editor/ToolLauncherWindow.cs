@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ToolLauncher.ListDrawer;
 using ToolLauncher.ToolLauncherSettings;
+using ToolLauncher.Tag;
 using UnityEditor;
 using UnityEngine;
 
@@ -151,6 +152,8 @@ namespace ToolLauncher
                             data =>
                             {
                                 _setting = (ToolLauncherSetting)data;
+                                
+                                // 設定に対応するタグを有効化し、他のタグは無効化する
                                 m_TagManager.SelectTag(_setting.TagName);
                             }, s);
                     }

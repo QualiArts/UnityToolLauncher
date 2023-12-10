@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace ToolLauncher
+namespace ToolLauncher.Tag
 {
     /// <summary>
     /// タグ選択GUIの管理
@@ -184,15 +184,17 @@ namespace ToolLauncher
             return isClick;
         }
 
-
-        Texture2D GetIconTexture(string tag, Color c)
+        /// <summary>
+        /// アイコン画像の取得
+        /// </summary>
+        private Texture2D GetIconTexture(string tagName, Color c)
         {
-            if (!tagTextures.ContainsKey(tag))
+            if (!tagTextures.ContainsKey(tagName))
             {
-                tagTextures[tag] = new Texture2D(1, 1);
+                tagTextures[tagName] = new Texture2D(1, 1);
             }
             
-            var t = tagTextures[tag];
+            var t = tagTextures[tagName];
             for (int x = 0; x < t.width; x++)
             {
                 for (int y = 0; y < t.height; y++)
