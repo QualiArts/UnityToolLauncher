@@ -119,7 +119,7 @@ namespace ToolLauncher.ListDrawer
                 else if (originalRect.Contains(current.mousePosition))
                 {
                     var serializedMethodInfo = SerializedMethodInfo.DeserializeFromJson(menu.serializedMethodInfoStr);
-                    serializedMethodInfo?.Method?.Invoke(null, null);
+                    serializedMethodInfo?.Invoke();
                 }
 
                 current.Use();
