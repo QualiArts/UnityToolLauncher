@@ -1,11 +1,5 @@
 {
   "dependencies": {
-    "com.rarudo.unity-tool-launcher": {
-      "version": "file:../../../",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
     "com.unity.collab-proxy": {
       "version": "2.2.0",
       "depth": 0,
@@ -140,6 +134,12 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "jp.qualiarts.unity-tool-launcher": {
+      "version": "file:../../../",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
