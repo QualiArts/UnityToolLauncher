@@ -54,11 +54,14 @@ namespace ToolLauncher
                          .SelectMany(x =>
                              x.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)))
             {
-                var menuItem = methodInfo.GetCustomAttribute<MenuItem>();
-                if (menuItem == null) continue;
-                if (menuItem.menuItem.StartsWith("CONTEXT")) continue;
+                var menuItems = methodInfo.GetCustomAttributes<MenuItem>();
+                foreach (var menuItem in menuItems)
+                {
+                    if (menuItem == null) continue;
+                    if (menuItem.menuItem.StartsWith("CONTEXT")) continue;
 
-                result.Add((menuItem.menuItem, methodInfo));
+                    result.Add((menuItem.menuItem, methodInfo));
+                }
             }
 
             _menuItemMethodsCache = result;
@@ -85,7 +88,7 @@ namespace ToolLauncher
             if (existingChild == null)
             {
                 var isLast = index == pathParts.Length - 1;
-                var newChildName = isLast ? $"{pathParts[index]} ({string.Join('/', pathParts)})" : pathParts[index];
+                var newChildName = isLast ? $"{pathParts[index]} ({string.Join("/", pathParts)})" : pathParts[index];
                 var newChild = isLast
                     ? new DropDownItem(newChildName, methodInfo)
                     : new AdvancedDropdownItem(newChildName);

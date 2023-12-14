@@ -28,11 +28,11 @@
 ![1700892763.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/213392/fba97805-089c-dd10-98bf-6a3086a7a841.gif)
 
 ## インストール方法
-PackageManagerから `https://github.com/rarudo/UnityToolLauncher.git`を指定してインストールします
+PackageManagerから `https://github.com/QualiArts/UnityToolLauncher.git`を指定してインストールします
 
 <img width="182" alt="スクリーンショット 2023-11-27 20 57 45" src="https://github.com/rarudo/UnityToolLauncher/assets/15700036/73b0d85e-f33d-4d92-bc67-e69629ab8abc">
 
-<img width="344" alt="スクリーンショット 2023-11-27 20 58 06" src="https://github.com/rarudo/UnityToolLauncher/assets/15700036/ddf706b0-19a7-43d2-821e-2cb5238cb40b">
+<img width="367" alt="スクリーンショット 2023-11-29 14 27 59" src="https://github.com/QualiArts/UnityToolLauncher/assets/15700036/c688723c-0755-445d-b590-6fb79e416ed2">
 
 
 ### 設定方法
