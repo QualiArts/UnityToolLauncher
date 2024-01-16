@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Reflection;
 using JetBrains.Annotations;
 using UnityEditor;
@@ -19,7 +20,9 @@ namespace ToolLauncher
             {
                 var type = Type.GetType(_assemblyQualifiedName);
                 if (type == null) return null;
-                return type.GetMethod(_methodName, BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic);
+                var method = type.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic)
+                    .First(m => m.Name == _methodName);
+                return method;
             }
         }
 
