@@ -26,10 +26,14 @@ namespace ToolLauncher
         }
 
         [SerializeField] private string _settingName;
+        [SerializeField] private string _tagName;
+        [SerializeField] private Color _tagColor = new Color(1, 1 ,1 ,1);
 
         [SerializeField] protected List<ToolLauncherMenu> MenuList = new List<ToolLauncherMenu>();
 
         public string DisplayName => !string.IsNullOrEmpty(_settingName) ? _settingName : name;
+        public string TagName => !string.IsNullOrEmpty(_tagName) ? _tagName : DisplayName;
+        public Color TagColor => _tagColor;
 
         public IReadOnlyList<ToolLauncherMenu> GetMenuList()
         {
@@ -43,11 +47,15 @@ namespace ToolLauncher
     class ToolLauncherSettingDrawer : Editor
     {
         private SerializedProperty _propSettingName;
+        private SerializedProperty _propTagName;
+        private SerializedProperty _propTagColor;
         private SerializedProperty _propMenuList;
 
         private void OnEnable()
         {
             _propSettingName = serializedObject.FindProperty("_settingName");
+            _propTagName = serializedObject.FindProperty("_tagName");
+            _propTagColor = serializedObject.FindProperty("_tagColor");
             _propMenuList = serializedObject.FindProperty("MenuList");
         }
 
@@ -55,6 +63,8 @@ namespace ToolLauncher
         {
             serializedObject.Update();
             EditorGUILayout.PropertyField(_propSettingName, new GUIContent("表示名"));
+            EditorGUILayout.PropertyField(_propTagName, new GUIContent("タグ名"));
+            EditorGUILayout.PropertyField(_propTagColor, new GUIContent("タグカラー"));
             EditorGUILayout.PropertyField(_propMenuList, new GUIContent("ツール一覧"));
             serializedObject.ApplyModifiedProperties();
         }
